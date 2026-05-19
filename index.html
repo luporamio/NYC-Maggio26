@@ -37,56 +37,56 @@
     .sidebar::-webkit-scrollbar { width: 3px; }
     .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 2px; }
 
+    /* SIDEBAR TAB (linguetta verticale) */
+    .sidebar-tab {
+      display: none;
+      position: fixed;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 26px;
+      height: 72px;
+      background: #1A1A2E;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-left: none;
+      border-radius: 0 10px 10px 0;
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 3px 0 14px rgba(0,0,0,0.4);
+      transition: left 0.35s cubic-bezier(0.4,0,0.2,1), background 0.2s;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .sidebar-tab:hover { background: #22223A; }
+    .tab-arrow {
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      transition: transform 0.3s;
+      line-height: 1;
+    }
+    .sidebar-tab.open .tab-arrow { transform: rotate(180deg); }
+    .tab-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+    }
+
     /* MOBILE */
     @media (max-width: 768px) {
+      .sidebar-tab { display: flex; }
       .sidebar {
         position: fixed;
         top: 0; left: 0;
-        width: 92vw;
-        max-width: 380px;
+        width: 88vw;
+        max-width: 360px;
         min-width: unset;
         transform: translateX(-100%);
         box-shadow: 4px 0 32px rgba(0,0,0,0.6);
       }
       .sidebar.open { transform: translateX(0); }
       #map { width: 100vw; }
-    }
-
-    /* OVERLAY (mobile) */
-    .overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.55);
-      z-index: 99;
-    }
-    .overlay.visible { display: block; }
-
-    /* TOGGLE BUTTON */
-    .toggle-btn {
-      display: none;
-      position: fixed;
-      bottom: 24px;
-      left: 16px;
-      z-index: 200;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      border: none;
-      background: #1A1A30;
-      color: white;
-      font-size: 20px;
-      cursor: pointer;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
-      border: 1px solid rgba(255,255,255,0.1);
-      transition: background 0.2s;
-    }
-    .toggle-btn:hover { background: #252540; }
-
-    @media (max-width: 768px) {
-      .toggle-btn { display: flex; }
     }
 
     .glow {
@@ -210,7 +210,10 @@
 </head>
 <body>
 
-<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+<div class="sidebar-tab" id="sidebar-tab" onclick="toggleSidebar()">
+  <span class="tab-arrow">›</span>
+  <span class="tab-dot" id="tab-dot"></span>
+</div>
 
 <aside class="sidebar" id="sidebar">
   <div class="glow" style="width:220px;height:220px;background:radial-gradient(circle,rgba(255,107,107,0.14),transparent);top:2%;left:-8%;"></div>
@@ -235,33 +238,33 @@
 
 <div id="map"></div>
 
-<!-- Toggle button (mobile) -->
-<button class="toggle-btn" id="toggle-btn" onclick="toggleSidebar()">☰</button>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 
 // ── SIDEBAR TOGGLE ──────────────────────────────────────────
+const SIDEBAR_W = Math.min(window.innerWidth * 0.88, 360);
+
 function toggleSidebar() {
   const sidebar = document.getElementById('sidebar');
-  const overlay = document.getElementById('overlay');
-  const btn = document.getElementById('toggle-btn');
+  const tab = document.getElementById('sidebar-tab');
   const isOpen = sidebar.classList.contains('open');
   if (isOpen) {
     sidebar.classList.remove('open');
-    overlay.classList.remove('visible');
-    btn.textContent = '☰';
+    tab.classList.remove('open');
+    tab.style.left = '0';
   } else {
     sidebar.classList.add('open');
-    overlay.classList.add('visible');
-    btn.textContent = '✕';
+    tab.classList.add('open');
+    tab.style.left = SIDEBAR_W + 'px';
   }
 }
 
 function closeSidebar() {
   document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('overlay').classList.remove('visible');
-  document.getElementById('toggle-btn').textContent = '☰';
+  const tab = document.getElementById('sidebar-tab');
+  tab.classList.remove('open');
+  tab.style.left = '0';
 }
 
 // ── DATI ────────────────────────────────────────────────────
@@ -370,6 +373,8 @@ function selectDay(idx) {
       t.style.background = '';
     }
   });
+  const dot = document.getElementById('tab-dot');
+  if (dot) dot.style.background = day.color;
 
   if (currentLayer) map.removeLayer(currentLayer);
   currentLayer = L.layerGroup();
