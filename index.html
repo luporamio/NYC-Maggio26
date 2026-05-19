@@ -201,6 +201,40 @@
       mix-blend-mode: overlay;
     }
 
+    /* TRANSIT CONNECTOR */
+    .transit-connector {
+      display: flex;
+      align-items: center;
+      padding: 2px 0 2px 32px;
+      position: relative;
+      min-height: 26px;
+    }
+    .transit-connector::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.03) 100%);
+    }
+    .transit-pill {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 9px 3px 7px;
+      border-radius: 20px;
+      font-size: 10px;
+      color: rgba(255,255,255,0.32);
+      border: 1px dashed rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.025);
+      line-height: 1.3;
+      flex-wrap: wrap;
+    }
+    .transit-time {
+      font-weight: 600;
+      color: rgba(255,255,255,0.55);
+    }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(7px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -275,14 +309,14 @@ const days = [
     color: "#FF6B6B", colorBg: "rgba(255,107,107,0.13)",
     places: [
       { name: "Colazione in hotel", emoji: "☕", coords: [40.7527, -73.9757], address: "Westgate NY Grand Central", note: "Inclusa. Poi uscita verso Times Square, 10 min a piedi." },
-      { name: "New York Public Library + Bryant Park", emoji: "🏛️", coords: [40.7531, -73.9822], address: "5th Ave & 42nd St", note: "Architettura neoclassica iconica. Gratis. Sosta al parco dietro.", maps: "https://www.google.com/maps?q=40.7531,-73.9822", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Rear_facade_and_main_building%2C_New_York_Public_Library.jpg/400px-Rear_facade_and_main_building%2C_New_York_Public_Library.jpg" },
-      { name: "Times Square", emoji: "✨", coords: [40.7580, -73.9855], address: "7th Ave & Broadway", note: "Di giorno e di notte (sul rientro in hotel). Va vista entrambe le volte.", maps: "https://www.google.com/maps?q=40.7580,-73.9855", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/New_york_times_square-terabass.jpg/400px-New_york_times_square-terabass.jpg" },
-      { name: "Vessel (Hudson Yards)", emoji: "🪜", coords: [40.7539, -74.0021], address: "Hudson Yards, 34th St W", note: "Struttura a nido d'ape, gratis. 10 min a piedi da Times Square verso ovest.", maps: "https://www.google.com/maps?q=40.7539,-74.0021", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Hudson_Yards_Vessel_2021_%28cropped%29.jpg/400px-Hudson_Yards_Vessel_2021_%28cropped%29.jpg" },
-      { name: "High Line - Ingresso nord (34th St)", emoji: "🌿", coords: [40.7530, -74.0042], address: "34th St & 11th Ave", note: "Entra dall'ingresso nord, cammini verso sud fino a Gansevoort.", maps: "https://www.google.com/maps?q=40.7530,-74.0042", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Highline_1.jpg/400px-Highline_1.jpg" },
-      { name: "High Line - Tramonto (Gansevoort)", emoji: "🌅", coords: [40.7396, -74.0078], address: "Washington St & Gansevoort St", note: "Tramonto Hudson ore 20:05. Arrivo alle 19:30.", maps: "https://www.google.com/maps?q=40.7396,-74.0078", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Highline_1.jpg/400px-Highline_1.jpg" },
-      { name: "Little Island", emoji: "🌊", coords: [40.7388, -74.0094], address: "Pier 55, Hudson River Park", note: "Parco sospeso sull'Hudson. Uscita High Line lato sud. Gratis.", maps: "https://www.google.com/maps?q=40.7388,-74.0094" },
-      { name: "Katz's Delicatessen", emoji: "🥪", coords: [40.7223, -73.9874], address: "205 E Houston St, LES", note: "Cena: pastrami sandwich iconico. ~25$/testa", maps: "https://www.google.com/maps?q=40.7223,-73.9874", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Katz%27s_deli.jpg/400px-Katz%27s_deli.jpg" },
-      { name: "Employees Only", emoji: "🍸", coords: [40.7282, -74.0044], address: "510 Hudson St, West Village", note: "Cocktail bar storico, aperto fino alle 4:00. Sul rientro passi Times Square.", maps: "https://www.google.com/maps?q=40.7282,-74.0044" }
+      { name: "New York Public Library + Bryant Park", emoji: "🏛️", coords: [40.7531, -73.9822], address: "5th Ave & 42nd St", note: "Architettura neoclassica iconica. Gratis. Sosta al parco dietro.", maps: "https://www.google.com/maps?q=40.7531,-73.9822", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Rear_facade_and_main_building%2C_New_York_Public_Library.jpg/400px-Rear_facade_and_main_building%2C_New_York_Public_Library.jpg", transit: { icon: "🚶", time: "5 min", how: "a piedi su 42nd St verso 5th Ave" } },
+      { name: "Times Square", emoji: "✨", coords: [40.7580, -73.9855], address: "7th Ave & Broadway", note: "Di giorno e di notte (sul rientro in hotel). Va vista entrambe le volte.", maps: "https://www.google.com/maps?q=40.7580,-73.9855", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/New_york_times_square-terabass.jpg/400px-New_york_times_square-terabass.jpg", transit: { icon: "🚶", time: "5 min", how: "a piedi su 42nd St verso 7th Ave" } },
+      { name: "Vessel (Hudson Yards)", emoji: "🪜", coords: [40.7539, -74.0021], address: "Hudson Yards, 34th St W", note: "Struttura a nido d'ape, gratis. 10 min a piedi da Times Square verso ovest.", maps: "https://www.google.com/maps?q=40.7539,-74.0021", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Hudson_Yards_Vessel_2021_%28cropped%29.jpg/400px-Hudson_Yards_Vessel_2021_%28cropped%29.jpg", transit: { icon: "🚶", time: "15 min", how: "a piedi su 34th St verso Hudson (o metro A/C/E a 34th)" } },
+      { name: "High Line - Ingresso nord (34th St)", emoji: "🌿", coords: [40.7530, -74.0042], address: "34th St & 11th Ave", note: "Entra dall'ingresso nord, cammini verso sud fino a Gansevoort.", maps: "https://www.google.com/maps?q=40.7530,-74.0042", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Highline_1.jpg/400px-Highline_1.jpg", transit: { icon: "🚶", time: "3 min", how: "a piedi, ingresso a 10th Ave & 34th" } },
+      { name: "High Line - Tramonto (Gansevoort)", emoji: "🌅", coords: [40.7396, -74.0078], address: "Washington St & Gansevoort St", note: "Tramonto Hudson ore 20:05. Arrivo alle 19:30.", maps: "https://www.google.com/maps?q=40.7396,-74.0078", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Highline_1.jpg/400px-Highline_1.jpg", transit: { icon: "🚶", time: "25 min", how: "a piedi lungo la High Line verso sud" } },
+      { name: "Little Island", emoji: "🌊", coords: [40.7388, -74.0094], address: "Pier 55, Hudson River Park", note: "Parco sospeso sull'Hudson. Uscita High Line lato sud. Gratis.", maps: "https://www.google.com/maps?q=40.7388,-74.0094", transit: { icon: "🚶", time: "4 min", how: "a piedi, Pier 55 all'uscita della High Line" } },
+      { name: "Katz's Delicatessen", emoji: "🥪", coords: [40.7223, -73.9874], address: "205 E Houston St, LES", note: "Cena: pastrami sandwich iconico. ~25$/testa", maps: "https://www.google.com/maps?q=40.7223,-73.9874", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Katz%27s_deli.jpg/400px-Katz%27s_deli.jpg", transit: { icon: "🚶", time: "20 min", how: "a piedi verso est su Gansevoort + Hudson St + Houston" } },
+      { name: "Employees Only", emoji: "🍸", coords: [40.7282, -74.0044], address: "510 Hudson St, West Village", note: "Cocktail bar storico, aperto fino alle 4:00. Sul rientro passi Times Square.", maps: "https://www.google.com/maps?q=40.7282,-74.0044", transit: { icon: "🚶", time: "12 min", how: "a piedi verso nord su Hudson St" } }
     ]
   },
   {
@@ -291,13 +325,13 @@ const days = [
     color: "#4ECDC4", colorBg: "rgba(78,205,196,0.13)",
     places: [
       { name: "Colazione in hotel", emoji: "☕", coords: [40.7527, -73.9757], address: "Westgate NY Grand Central", note: "Inclusa. Poi a piedi verso Rockefeller, 10 min." },
-      { name: "Rockefeller Center + Top of the Rock", emoji: "🏙️", coords: [40.7587, -73.9787], address: "30 Rockefeller Plaza", note: "Top of the Rock: vista su Central Park e skyline. ~40$/testa. Prenota online.", maps: "https://www.google.com/maps?q=40.7587,-73.9787", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/30_rock_from_top_of_the_rock_2009.jpg/400px-30_rock_from_top_of_the_rock_2009.jpg" },
-      { name: "St. Patrick's Cathedral", emoji: "⛪", coords: [40.7584, -73.9762], address: "5th Ave & 50th St", note: "2 min a piedi dal Rockefeller. Gratis. Architettura gotica mozzafiato.", maps: "https://www.google.com/maps?q=40.7584,-73.9762", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/NYC_St_Patrick%27s_Cathedral.jpg/400px-NYC_St_Patrick%27s_Cathedral.jpg" },
-      { name: "Fifth Avenue", emoji: "🛍️", coords: [40.7638, -73.9730], address: "Fifth Avenue, Midtown", note: "A piedi verso nord fino a Central Park. Vetrine, Saks, Bergdorf.", maps: "https://www.google.com/maps?q=40.7638,-73.9730" },
-      { name: "Central Park - Columbus Circle", emoji: "🏃", coords: [40.7683, -73.9819], address: "Columbus Circle (59th St)", note: "Ingresso loop da 9.7km in senso antiorario.", maps: "https://www.google.com/maps?q=40.7683,-73.9819", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Central_park_aerial_from_above_%28cropped%29.jpg/400px-Central_park_aerial_from_above_%28cropped%29.jpg" },
-      { name: "Sheep Meadow - Picnic", emoji: "🌿", coords: [40.7718, -73.9763], address: "Central Park", note: "Sosta sul grande prato. Hot dog dal cart qui vicino, 2$.", maps: "https://www.google.com/maps?q=40.7718,-73.9763" },
-      { name: "Rientro hotel + doccia", emoji: "🚿", coords: [40.7527, -73.9757], address: "Westgate NY Grand Central", note: "Cambio e recupero. Partenza verso Williamsburg entro le 16:30." },
-      { name: "RIVA - Arlo Williamsburg", emoji: "🎉", coords: [40.7199, -73.9587], address: "96 Wythe Ave, Williamsburg", note: "Sunset Saturday's w/ Stephan Jolk. Dalle 17:00 a mezzanotte. Ticket gia presi.", maps: "https://www.google.com/maps?q=40.7199,-73.9587" }
+      { name: "Rockefeller Center + Top of the Rock", emoji: "🏙️", coords: [40.7587, -73.9787], address: "30 Rockefeller Plaza", note: "Top of the Rock: vista su Central Park e skyline. ~40$/testa. Prenota online.", maps: "https://www.google.com/maps?q=40.7587,-73.9787", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/30_rock_from_top_of_the_rock_2009.jpg/400px-30_rock_from_top_of_the_rock_2009.jpg", transit: { icon: "🚶", time: "10 min", how: "a piedi su 6th Ave verso nord" } },
+      { name: "St. Patrick's Cathedral", emoji: "⛪", coords: [40.7584, -73.9762], address: "5th Ave & 50th St", note: "2 min a piedi dal Rockefeller. Gratis. Architettura gotica mozzafiato.", maps: "https://www.google.com/maps?q=40.7584,-73.9762", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/NYC_St_Patrick%27s_Cathedral.jpg/400px-NYC_St_Patrick%27s_Cathedral.jpg", transit: { icon: "🚶", time: "2 min", how: "a piedi, stesso isolato su 5th Ave" } },
+      { name: "Fifth Avenue", emoji: "🛍️", coords: [40.7638, -73.9730], address: "Fifth Avenue, Midtown", note: "A piedi verso nord fino a Central Park. Vetrine, Saks, Bergdorf.", maps: "https://www.google.com/maps?q=40.7638,-73.9730", transit: { icon: "🚶", time: "8 min", how: "a piedi su 5th Ave verso nord (50th a 58th)" } },
+      { name: "Central Park - Columbus Circle", emoji: "🏃", coords: [40.7683, -73.9819], address: "Columbus Circle (59th St)", note: "Ingresso loop da 9.7km in senso antiorario.", maps: "https://www.google.com/maps?q=40.7683,-73.9819", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Central_park_aerial_from_above_%28cropped%29.jpg/400px-Central_park_aerial_from_above_%28cropped%29.jpg", transit: { icon: "🚶", time: "4 min", how: "a piedi su 59th St fino a Columbus Circle" } },
+      { name: "Sheep Meadow - Picnic", emoji: "🌿", coords: [40.7718, -73.9763], address: "Central Park", note: "Sosta sul grande prato. Hot dog dal cart qui vicino, 2$.", maps: "https://www.google.com/maps?q=40.7718,-73.9763", transit: { icon: "🏃", time: "15 min", how: "corsa all'interno del parco (loop antiorario)" } },
+      { name: "Rientro hotel + doccia", emoji: "🚿", coords: [40.7527, -73.9757], address: "Westgate NY Grand Central", note: "Cambio e recupero. Partenza verso Williamsburg entro le 16:30.", transit: { icon: "🚶", time: "20 min", how: "a piedi su Central Park S verso est fino a 42nd" } },
+      { name: "RIVA - Arlo Williamsburg", emoji: "🎉", coords: [40.7199, -73.9587], address: "96 Wythe Ave, Williamsburg", note: "Sunset Saturday's w/ Stephan Jolk. Dalle 17:00 a mezzanotte. Ticket gia presi.", maps: "https://www.google.com/maps?q=40.7199,-73.9587", transit: { icon: "🚇", time: "30 min", how: "metro L da 14th St Union Square fino a Bedford Ave" } }
     ]
   },
   {
@@ -306,18 +340,18 @@ const days = [
     color: "#FFD166", colorBg: "rgba(255,209,102,0.13)",
     places: [
       { name: "Colazione in hotel", emoji: "☕", coords: [40.7527, -73.9757], address: "Westgate NY Grand Central", note: "Inclusa. Poi a piedi verso il Tramway, 20 min est." },
-      { name: "Roosevelt Island Tramway", emoji: "🚡", coords: [40.7579, -73.9572], address: "59th St & 2nd Ave", note: "Teleferica sull'East River: 2.90$. Vista unica su Manhattan da fuori. 10 min.", maps: "https://www.google.com/maps?q=40.7579,-73.9572", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Roosevelt_Island_Aerial_Tram_jeh.jpg/400px-Roosevelt_Island_Aerial_Tram_jeh.jpg" },
-      { name: "JG Melon", emoji: "🍔", coords: [40.7737, -73.9576], address: "1291 3rd Ave (ang. 74th St), UES", note: "Taxi 15 min dal Tramway. Burger iconico dal 1972. ~25$/testa.", maps: "https://www.google.com/maps?q=40.7737,-73.9576" },
-      { name: "Flatiron Building", emoji: "🏙️", coords: [40.7411, -73.9897], address: "175 5th Ave (ang. 23rd St)", note: "Metro giu da UES. Foto dall'incrocio con Broadway.", maps: "https://www.google.com/maps?q=40.7411,-73.9897", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Flatiron_crop_squared.jpg/400px-Flatiron_crop_squared.jpg" },
-      { name: "Washington Square Park", emoji: "🌳", coords: [40.7309, -74.0001], address: "Washington Square Park", note: "10 min a piedi da Flatiron. Arco, buskers, atmosfera.", maps: "https://www.google.com/maps?q=40.7309,-74.0001", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Washington_Square_Park_in_autumn.jpg/400px-Washington_Square_Park_in_autumn.jpg" },
-      { name: "Joe's Pizza", emoji: "🍕", coords: [40.7302, -74.0024], address: "7 Carmine St, West Village", note: "2 min da Washington Square. Miglior slice di NYC, 4$.", maps: "https://www.google.com/maps?q=40.7302,-74.0024" },
-      { name: "Russ & Daughters", emoji: "🐟", coords: [40.7220, -73.9889], address: "179 E Houston St, LES", note: "Bagel con salmone affumicato e cream cheese. Storico dal 1914.", maps: "https://www.google.com/maps?q=40.7220,-73.9889" },
-      { name: "Brooklyn Bridge (lato Manhattan)", emoji: "🌉", coords: [40.7126, -74.0027], address: "Ingresso pedonale, Centre St", note: "20 min a piedi verso sud da LES. Camminata verso Brooklyn.", maps: "https://www.google.com/maps?q=40.7126,-74.0027", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/BB_from_east.jpg/400px-BB_from_east.jpg" },
-      { name: "Charging Bull + Wall Street", emoji: "🐂", coords: [40.7056, -74.0134], address: "Bowling Green / Broad St", note: "5 min dal ponte. NYSE, Federal Hall, storia americana.", maps: "https://www.google.com/maps?q=40.7056,-74.0134", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Charging_Bull_from_behind.jpg/400px-Charging_Bull_from_behind.jpg" },
-      { name: "Staten Island Ferry", emoji: "⛴️", coords: [40.6995, -74.0135], address: "Whitehall Terminal, FiDi", note: "2 min da Wall St. Gratis. Vista Statua della Liberta andata+ritorno, 50 min.", maps: "https://www.google.com/maps?q=40.6995,-74.0135", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Staten_Island_Ferry_Whitehall_Terminal.jpg/400px-Staten_Island_Ferry_Whitehall_Terminal.jpg" },
-      { name: "One World Trade Center", emoji: "🗼", coords: [40.7127, -74.0059], address: "285 Fulton St, Financial District", note: "Osservatorio opzionale ~35$/testa. Dall'esterno gia impressionante.", maps: "https://www.google.com/maps?q=40.7127,-74.0059", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/1WTC_2019.jpg/400px-1WTC_2019.jpg" },
-      { name: "The Dead Rabbit", emoji: "🐇", coords: [40.7028, -74.0128], address: "30 Water St, Financial District", note: "5 min da WTC. Cocktail storici su 3 piani.", maps: "https://www.google.com/maps?q=40.7028,-74.0128" },
-      { name: "7th Street Burger", emoji: "🍔", coords: [40.7278, -73.9893], address: "7 E 7th St, East Village", note: "Uber 15 min verso nord. Cena sulla strada del rientro in hotel.", maps: "https://www.google.com/maps?q=40.7278,-73.9893" }
+      { name: "Roosevelt Island Tramway", emoji: "🚡", coords: [40.7579, -73.9572], address: "59th St & 2nd Ave", note: "Teleferica sull'East River: 2.90$. Vista unica su Manhattan da fuori. 10 min.", maps: "https://www.google.com/maps?q=40.7579,-73.9572", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Roosevelt_Island_Aerial_Tram_jeh.jpg/400px-Roosevelt_Island_Aerial_Tram_jeh.jpg", transit: { icon: "🚶", time: "20 min", how: "a piedi su 42nd St verso est, poi 59th St" } },
+      { name: "JG Melon", emoji: "🍔", coords: [40.7737, -73.9576], address: "1291 3rd Ave (ang. 74th St), UES", note: "Taxi 15 min dal Tramway. Burger iconico dal 1972. ~25$/testa.", maps: "https://www.google.com/maps?q=40.7737,-73.9576", transit: { icon: "🚶", time: "18 min", how: "a piedi su 3rd Ave verso nord (59th a 74th)" } },
+      { name: "Flatiron Building", emoji: "🏙️", coords: [40.7411, -73.9897], address: "175 5th Ave (ang. 23rd St)", note: "Metro giu da UES. Foto dall'incrocio con Broadway.", maps: "https://www.google.com/maps?q=40.7411,-73.9897", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Flatiron_crop_squared.jpg/400px-Flatiron_crop_squared.jpg", transit: { icon: "🚇", time: "18 min", how: "metro 6 da 77th St a 23rd St (linea verde)" } },
+      { name: "Washington Square Park", emoji: "🌳", coords: [40.7309, -74.0001], address: "Washington Square Park", note: "10 min a piedi da Flatiron. Arco, buskers, atmosfera.", maps: "https://www.google.com/maps?q=40.7309,-74.0001", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Washington_Square_Park_in_autumn.jpg/400px-Washington_Square_Park_in_autumn.jpg", transit: { icon: "🚶", time: "10 min", how: "a piedi su 5th Ave verso sud" } },
+      { name: "Joe's Pizza", emoji: "🍕", coords: [40.7302, -74.0024], address: "7 Carmine St, West Village", note: "2 min da Washington Square. Miglior slice di NYC, 4$.", maps: "https://www.google.com/maps?q=40.7302,-74.0024", transit: { icon: "🚶", time: "3 min", how: "a piedi, Carmine St a 2 min da Washington Square" } },
+      { name: "Russ & Daughters", emoji: "🐟", coords: [40.7220, -73.9889], address: "179 E Houston St, LES", note: "Bagel con salmone affumicato e cream cheese. Storico dal 1914.", maps: "https://www.google.com/maps?q=40.7220,-73.9889", transit: { icon: "🚶", time: "15 min", how: "a piedi verso est su Houston St fino al LES" } },
+      { name: "Brooklyn Bridge (lato Manhattan)", emoji: "🌉", coords: [40.7126, -74.0027], address: "Ingresso pedonale, Centre St", note: "20 min a piedi verso sud da LES. Camminata verso Brooklyn.", maps: "https://www.google.com/maps?q=40.7126,-74.0027", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/BB_from_east.jpg/400px-BB_from_east.jpg", transit: { icon: "🚶", time: "18 min", how: "a piedi verso sud su Essex/Clinton St" } },
+      { name: "Charging Bull + Wall Street", emoji: "🐂", coords: [40.7056, -74.0134], address: "Bowling Green / Broad St", note: "5 min dal ponte. NYSE, Federal Hall, storia americana.", maps: "https://www.google.com/maps?q=40.7056,-74.0134", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Charging_Bull_from_behind.jpg/400px-Charging_Bull_from_behind.jpg", transit: { icon: "🚶", time: "12 min", how: "a piedi verso sud su Broadway/Nassau St" } },
+      { name: "Staten Island Ferry", emoji: "⛴️", coords: [40.6995, -74.0135], address: "Whitehall Terminal, FiDi", note: "Gratis. Vista Statua della Liberta andata+ritorno, ~50 min totali.", maps: "https://www.google.com/maps?q=40.6995,-74.0135", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Staten_Island_Ferry_Whitehall_Terminal.jpg/400px-Staten_Island_Ferry_Whitehall_Terminal.jpg", transit: { icon: "🚶", time: "5 min", how: "a piedi, Whitehall Terminal a Bowling Green" } },
+      { name: "One World Trade Center", emoji: "🗼", coords: [40.7127, -74.0059], address: "285 Fulton St, Financial District", note: "Osservatorio opzionale ~35$/testa. Dall'esterno gia impressionante.", maps: "https://www.google.com/maps?q=40.7127,-74.0059", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/1WTC_2019.jpg/400px-1WTC_2019.jpg", transit: { icon: "🚶", time: "10 min", how: "a piedi dal terminal di rientro su Fulton St" } },
+      { name: "The Dead Rabbit", emoji: "🐇", coords: [40.7028, -74.0128], address: "30 Water St, Financial District", note: "5 min da WTC. Cocktail storici su 3 piani.", maps: "https://www.google.com/maps?q=40.7028,-74.0128", transit: { icon: "🚶", time: "6 min", how: "a piedi verso sud su Greenwich St / Water St" } },
+      { name: "7th Street Burger", emoji: "🍔", coords: [40.7278, -73.9893], address: "7 E 7th St, East Village", note: "Cena sulla strada del rientro in hotel.", maps: "https://www.google.com/maps?q=40.7278,-73.9893", transit: { icon: "🚕", time: "15 min", how: "Uber da FiDi a East Village" } }
     ]
   },
   {
@@ -326,9 +360,9 @@ const days = [
     color: "#96CEB4", colorBg: "rgba(150,206,180,0.13)",
     places: [
       { name: "Colazione in hotel", emoji: "☕", coords: [40.7527, -73.9757], address: "Westgate NY Grand Central", note: "Inclusa. Ultima mattina." },
-      { name: "Central Park - Ultimo giro", emoji: "🌿", coords: [40.7812, -73.9665], address: "Central Park, Upper West Side", note: "15 min a piedi dall'hotel. Facoltativo.", maps: "https://www.google.com/maps?q=40.7812,-73.9665", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Central_park_aerial_from_above_%28cropped%29.jpg/400px-Central_park_aerial_from_above_%28cropped%29.jpg" },
-      { name: "Gray's Papaya", emoji: "🌭", coords: [40.7836, -73.9812], address: "2090 Broadway, Upper West Side", note: "Hot dog a 2$. Il modo giusto per chiudere NYC.", maps: "https://www.google.com/maps?q=40.7836,-73.9812" },
-      { name: "JFK Airport", emoji: "✈️", coords: [40.6413, -73.7781], address: "Queens, New York", note: "Uber 45-60 min. Dall'hotel entro le 14:30.", maps: "https://www.google.com/maps?q=40.6413,-73.7781", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/John_F_Kennedy_International_Airport.jpg/400px-John_F_Kennedy_International_Airport.jpg" }
+      { name: "Central Park - Ultimo giro", emoji: "🌿", coords: [40.7812, -73.9665], address: "Central Park, Upper West Side", note: "15 min a piedi dall'hotel. Facoltativo.", maps: "https://www.google.com/maps?q=40.7812,-73.9665", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Central_park_aerial_from_above_%28cropped%29.jpg/400px-Central_park_aerial_from_above_%28cropped%29.jpg", transit: { icon: "🚶", time: "18 min", how: "a piedi su 5th Ave o 8th Ave verso nord" } },
+      { name: "Gray's Papaya", emoji: "🌭", coords: [40.7836, -73.9812], address: "2090 Broadway, Upper West Side", note: "Hot dog a 2$. Il modo giusto per chiudere NYC.", maps: "https://www.google.com/maps?q=40.7836,-73.9812", transit: { icon: "🚶", time: "5 min", how: "a piedi, Broadway & 77th St" } },
+      { name: "JFK Airport", emoji: "✈️", coords: [40.6413, -73.7781], address: "Queens, New York", note: "Uber 45-60 min. Dall'hotel entro le 14:30.", maps: "https://www.google.com/maps?q=40.6413,-73.7781", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/John_F_Kennedy_International_Airport.jpg/400px-John_F_Kennedy_International_Airport.jpg", transit: { icon: "🚕", time: "45-60 min", how: "Uber dall'hotel. Parti entro le 14:30." } }
     ]
   }
 ];
@@ -421,6 +455,13 @@ function renderSidebar(day) {
 
   const list = document.getElementById('places-list');
   day.places.forEach((place, i) => {
+    if (i > 0 && place.transit) {
+      const connector = document.createElement('div');
+      connector.className = 'transit-connector';
+      connector.innerHTML = `<span class="transit-pill"><span>${place.transit.icon}</span><span class="transit-time">${place.transit.time}</span><span>${place.transit.how}</span></span>`;
+      list.appendChild(connector);
+    }
+
     const el = document.createElement('div');
     el.className = 'place-item';
     el.style.animationDelay = (i * 0.045) + 's';
